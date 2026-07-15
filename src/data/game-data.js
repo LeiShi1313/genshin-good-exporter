@@ -1,5 +1,1232 @@
-// Generated from frzyc/genshin-optimizer. Do not edit by hand.
+// Generated from frzyc/genshin-optimizer 10.37.1. Do not edit by hand.
 // Run `npm run sync-data` to refresh these canonical GOOD mappings.
+
+export const GENSHIN_OPTIMIZER_REVISION = "10.37.1";
+
+export const TALENT_LIMITS = [1,1,2,4,6,8,10];
+
+export const CONSTELLATION_TALENT_BOOSTS = {
+  "Aino": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Albedo": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Alhaitham": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Amber": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "AratakiItto": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Arlecchino": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Baizhu": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Barbara": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Beidou": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Bennett": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Candace": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Charlotte": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Chasca": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Chevreuse": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Chiori": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Chongyun": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Citlali": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Clorinde": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Collei": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Columbina": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Cyno": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Dahlia": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Dehya": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Diluc": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Diona": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Dori": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Durin": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Emilie": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Escoffier": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Eula": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Faruzan": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Fischl": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Flins": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Freminet": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Furina": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Gaming": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Ganyu": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Gorou": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "HuTao": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Iansan": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Illuga": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Ifa": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Ineffa": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Jahoda": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Jean": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Kachina": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "KaedeharaKazuha": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Kaeya": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "KamisatoAyaka": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "KamisatoAyato": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Kaveh": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Keqing": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Kinich": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Kirara": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Klee": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "KujouSara": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "KukiShinobu": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "LanYan": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Lauma": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Layla": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Linnea": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Lisa": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Lohen": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Lynette": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Lyney": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Mavuika": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Mika": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Mona": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Mualani": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Nahida": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Navia": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Nefer": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Neuvillette": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Nicole": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Nilou": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Ningguang": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Noelle": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Ororon": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Prune": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Qiqi": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "RaidenShogun": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Razor": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Rosaria": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Sandrone": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "SangonomiyaKokomi": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Sayu": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Sethos": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Shenhe": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "ShikanoinHeizou": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Sigewinne": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Skirk": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Somnia": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Sucrose": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Tartaglia": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Thoma": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Tighnari": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Varesa": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "auto",
+      "amount": 3
+    }
+  },
+  "Varka": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Venti": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Wanderer": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Wriothesley": {
+    "3": {
+      "slot": "auto",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Xiangling": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Xianyun": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Xiao": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Xilonen": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Xingqiu": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Xinyan": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "YaeMiko": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Yanfei": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Yaoyao": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Yelan": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Yoimiya": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "YumemizukiMizuki": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "YunJin": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "Zhongli": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Zibai": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "TravelerAnemo": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "TravelerGeo": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "TravelerElectro": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
+  },
+  "TravelerDendro": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "TravelerHydro": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "TravelerPyro": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  }
+};
 
 export const CHARACTER_ID_MAP = {
   "10000002": "KamisatoAyaka",

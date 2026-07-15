@@ -120,3 +120,76 @@ test("reports ambiguous level-cap ascension", () => {
   assert.equal(__test.ascensionFrom({}, 80, "Weapon", warn, { id: 1 }), 5);
   assert.equal(warnings[0][0], "ambiguous-ascension");
 });
+
+function characterWithTalents({ id, name, constellation, skills, element = "Electro", ascension = 6 }) {
+  return {
+    characters: [{ id, name, level: 90, element, actived_constellation_num: constellation }],
+    details: [{
+      id,
+      data: {
+        list: [{
+          base: {
+            id,
+            name,
+            level: 90,
+            max_level: 90,
+            promote_level: ascension,
+            element,
+            actived_constellation_num: constellation
+          },
+          skills: skills.map((level) => ({ skill_type: 1, level, is_unlock: true }))
+        }]
+      }
+    }]
+  };
+}
+
+test("removes Yae Miko's unlocked C3 and C5 displayed talent boosts", () => {
+  const { good, report } = convertHoYoLabToGOOD(characterWithTalents({
+    id: 10000058,
+    name: "Yae Miko",
+    constellation: 5,
+    skills: [8, 9, 13]
+  }));
+
+  assert.deepEqual(good.characters[0].talent, { auto: 8, skill: 6, burst: 10 });
+  assert.equal(report.warnings.filter((warning) => warning.code === "talent-inference").length, 2);
+});
+
+test("uses GO metadata for characters whose constellation boosts Normal Attack", () => {
+  const { good } = convertHoYoLabToGOOD(characterWithTalents({
+    id: 10000111,
+    name: "Varesa",
+    constellation: 5,
+    skills: [9, 8, 10],
+    element: "Electric"
+  }));
+
+  assert.deepEqual(good.characters[0].talent, { auto: 6, skill: 8, burst: 7 });
+});
+
+test("does not mistake Tartaglia's passive Normal Attack boost for a constellation boost", () => {
+  const { good } = convertHoYoLabToGOOD(characterWithTalents({
+    id: 10000033,
+    name: "Tartaglia",
+    constellation: 6,
+    skills: [9, 9, 13],
+    element: "Water"
+  }));
+
+  assert.deepEqual(good.characters[0].talent, { auto: 9, skill: 6, burst: 10 });
+});
+
+test("prefers explicit base levels and applies the ascension talent cap", () => {
+  const input = characterWithTalents({
+    id: 10000058,
+    name: "Yae Miko",
+    constellation: 3,
+    skills: [8, 13, 8],
+    ascension: 4
+  });
+  input.details[0].data.list[0].skills[1].base_level = 8;
+
+  const { good } = convertHoYoLabToGOOD(input);
+  assert.deepEqual(good.characters[0].talent, { auto: 6, skill: 6, burst: 6 });
+});

@@ -28,6 +28,8 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
+          # JavaScript reads values from process.env; shell expansion is intentionally disabled.
+          # shellcheck disable=SC2016
           node --input-type=module -e '
             import { readFileSync } from "node:fs";
             const manifest = JSON.parse(readFileSync("manifest.json", "utf8"));

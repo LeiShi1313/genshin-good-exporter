@@ -1,0 +1,108 @@
+name: Update Genshin Optimizer data
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-genshin-optimizer-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Find the latest stable Genshin Optimizer release
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh api 'repos/frzyc/genshin-optimizer/releases?per_page=100' \
+            --jq '[.[] | select(.draft == false and .prerelease == false) | .tag_name | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))][0]')"
+          current="$(node -p "require('./config/genshin-optimizer.json').revision")"
+          test -n "$latest"
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          if [ "$latest" = "$current" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pin the new release
+        if: steps.version.outputs.changed == 'true'
+        env:
+          GO_REVISION: ${{ steps.version.outputs.latest }}
+        run: |
+          # JavaScript reads values from process.env; shell expansion is intentionally disabled.
+          # shellcheck disable=SC2016
+          node --input-type=module -e '
+            import { readFileSync, writeFileSync } from "node:fs";
+            const file = "config/genshin-optimizer.json";
+            const config = JSON.parse(readFileSync(file, "utf8"));
+            config.revision = process.env.GO_REVISION;
+            writeFileSync(file, `${JSON.stringify(config, null, 2)}\n`);
+          '
+
+      - name: Sparse-checkout Genshin Optimizer
+        if: steps.version.outputs.changed == 'true'
+        env:
+          GO_REVISION: ${{ steps.version.outputs.latest }}
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse --branch "$GO_REVISION" \
+            https://github.com/frzyc/genshin-optimizer.git "$RUNNER_TEMP/genshin-optimizer"
+          git -C "$RUNNER_TEMP/genshin-optimizer" sparse-checkout set \
+            libs/gi/dm/src/mapping \
+            libs/gi/dm/src/dm/artifact \
+            libs/gi/consts/src \
+            libs/gi/sheets/src/Characters
+
+      - name: Regenerate and validate canonical data
+        if: steps.version.outputs.changed == 'true'
+        env:
+          GO_SOURCE_DIR: ${{ runner.temp }}/genshin-optimizer
+        run: |
+          npm run sync-data
+          npm run check
+          changed="$(git status --short | sed 's/^...//' | sort)"
+          expected="$(printf '%s\n' config/genshin-optimizer.json src/data/game-data.js | sort)"
+          test "$changed" = "$expected"
+
+      - name: Open or update the dependency PR
+        if: steps.version.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GO_REVISION: ${{ steps.version.outputs.latest }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          branch="automation/genshin-optimizer-data"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add config/genshin-optimizer.json src/data/game-data.js
+          git commit -m "Update Genshin Optimizer data to $GO_REVISION"
+          git push --force origin "HEAD:$branch"
+
+          pr="$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')"
+          body="Updates the pinned Genshin Optimizer source to $GO_REVISION and regenerates canonical GOOD IDs, artifact mappings, talent caps, and C3/C5 talent-boost metadata. The generator and full extension checks passed before this PR was created."
+          if [ -n "$pr" ]; then
+            gh pr edit "$pr" --title "Update Genshin Optimizer data to $GO_REVISION" --body "$body"
+          else
+            gh pr create --base "$BASE_BRANCH" --head "$branch" \
+              --title "Update Genshin Optimizer data to $GO_REVISION" --body "$body"
+          fi

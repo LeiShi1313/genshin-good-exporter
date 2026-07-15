@@ -67,11 +67,16 @@ For an existing local optimizer checkout:
 GO_SOURCE_DIR=/path/to/genshin-optimizer npm run sync-data
 ```
 
-Pushing a tag matching the manifest version, such as `v0.3.4`, runs the release workflow. It validates the project, packages only the runtime extension files, creates a SHA-256 checksum, and publishes both files to a GitHub release.
+The pinned optimizer release is recorded in `config/genshin-optimizer.json`. Generation also extracts canonical ascension talent caps and each character's explicit C3/C5 `autoBoost`, `skillBoost`, or `burstBoost`. Exported talent levels therefore remove unlocked constellation `+3` bonuses; unrelated boost nodes such as Tartaglia's team Normal Attack `+1` are never mistaken for constellation upgrades.
+
+The scheduled **Update Genshin Optimizer data** workflow checks for a newer stable GO release each day. It regenerates the data, requires every supported character to have an unambiguous C3 and C5 mapping, runs the complete test suite, and opens or updates a dependency PR. Unexpected upstream structures fail closed instead of producing guessed GOOD keys or talent levels.
+
+Pushing a tag matching the manifest version, such as `v0.3.5`, runs the release workflow. It validates the project, packages only the runtime extension files, creates a SHA-256 checksum, and publishes both files to a GitHub release.
 
 ## Notes
 
 - Battle Record endpoints and response fields are undocumented implementation details and may change.
 - The 米游社 China adapter uses the same non-secret `DS` compatibility signature as the official web Battle Record page; it does not read or export cookies.
 - At level-cap boundaries, ascension can be ambiguous if the API omits `max_level`; the exporter chooses the minimum valid ascension and reports it.
+- When Battle Record returns an effective talent level, the exporter removes unlocked C3/C5 boosts using the pinned Genshin Optimizer character model and clamps the invested level to the character's ascension cap.
 - The APIs do not expose lock state, so exported equipped items use `lock: false` and the report records this limitation.

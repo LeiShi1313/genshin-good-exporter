@@ -2,6 +2,8 @@ import {
   ARTIFACT_PIECE_SET_ID_MAP,
   ARTIFACT_SET_ID_MAP,
   CHARACTER_ID_MAP,
+  CONSTELLATION_TALENT_BOOSTS,
+  TALENT_LIMITS,
   WEAPON_ID_MAP
 } from "../data/game-data.js";
 
@@ -229,20 +231,32 @@ function ascensionFrom(record, level, kind, warn, context) {
   return minimum;
 }
 
-function skillLevel(skill, warn, context) {
-  const explicitBase = firstDefined(skill?.base_level, skill?.original_level, skill?.level_before_enhanced);
-  if (explicitBase !== undefined) return clamp(integer(explicitBase, 1), 1, 15);
-
-  let level = clamp(integer(skill?.level, 1), 1, 15);
-  if (skill?.is_enhanced && skill?.can_enhanced) {
-    const delta = integer(firstDefined(skill?.level_delta, skill?.extra_level, 3), 3);
-    level = clamp(level - delta, 1, 15);
-    warn.add("talent-inference", "A constellation-enhanced talent level was converted back to its base level.", context);
-  }
-  return level;
+function constellationTalentBoost(characterKey, constellation, slot) {
+  return Object.entries(CONSTELLATION_TALENT_BOOSTS[characterKey] || {})
+    .filter(([required, boost]) => constellation >= Number(required) && boost.slot === slot)
+    .reduce((sum, [, boost]) => sum + boost.amount, 0);
 }
 
-function talentsFrom(record, warn, context) {
+function skillLevel(skill, characterKey, constellation, ascension, slot, warn, context) {
+  const cap = TALENT_LIMITS[ascension] ?? TALENT_LIMITS[TALENT_LIMITS.length - 1];
+  const explicitBase = firstDefined(skill?.base_level, skill?.original_level, skill?.level_before_enhanced);
+  if (explicitBase !== undefined) return clamp(integer(explicitBase, 1), 1, cap);
+
+  let level = clamp(integer(skill?.level, 1), 1, 15);
+  const boost = constellationTalentBoost(characterKey, constellation, slot);
+  if (boost) {
+    const displayedLevel = level;
+    level -= boost;
+    warn.add(
+      "talent-inference",
+      "A constellation-enhanced displayed talent level was converted back to its invested level.",
+      { ...context, displayedLevel, constellation, boost }
+    );
+  }
+  return clamp(level, 1, cap);
+}
+
+function talentsFrom(record, characterKey, constellation, ascension, warn, context) {
   const skills = Array.isArray(record?.skills) ? record.skills : [];
   let active = skills.filter((skill) => Number(skill?.skill_type) === 1 && skill?.is_unlock !== false);
   if (active.length < 3) active = skills.filter((skill) => skill?.can_enhanced && skill?.is_unlock !== false);
@@ -253,9 +267,9 @@ function talentsFrom(record, warn, context) {
   }
 
   return {
-    auto: skillLevel(active[0], warn, { ...context, talent: "auto" }),
-    skill: skillLevel(active[1], warn, { ...context, talent: "skill" }),
-    burst: skillLevel(active[2], warn, { ...context, talent: "burst" })
+    auto: skillLevel(active[0], characterKey, constellation, ascension, "auto", warn, { ...context, talent: "auto" }),
+    skill: skillLevel(active[1], characterKey, constellation, ascension, "skill", warn, { ...context, talent: "skill" }),
+    burst: skillLevel(active[2], characterKey, constellation, ascension, "burst", warn, { ...context, talent: "burst" })
   };
 }
 
@@ -439,6 +453,8 @@ export function convertHoYoLabToGOOD(raw) {
     const context = { characterId: listId, characterKey: key };
     const level = clamp(integer(firstDefined(base?.level, record?.level, listCharacter?.level, 1), 1), 1, 100);
     const location = equipmentLocation(key);
+    const constellation = constellationFrom(base, record, listCharacter);
+    const ascension = ascensionFrom(base, level, "Character", warn, context);
 
     if (detailEntry?.error) {
       warn.add("character-detail-failed", "Character detail could not be fetched; equipment may be missing.", {
@@ -450,9 +466,9 @@ export function convertHoYoLabToGOOD(raw) {
     characters.push({
       key,
       level,
-      constellation: constellationFrom(base, record, listCharacter),
-      ascension: ascensionFrom(base, level, "Character", warn, context),
-      talent: talentsFrom(record, warn, context)
+      constellation,
+      ascension,
+      talent: talentsFrom(record, key, constellation, ascension, warn, context)
     });
 
     const weapon = convertWeapon(record?.weapon || base?.weapon, location, warn, context);
@@ -468,7 +484,7 @@ export function convertHoYoLabToGOOD(raw) {
   const good = {
     format: "GOOD",
     version: 3,
-    source: "HoYoLAB GOOD Exporter 0.2.0",
+    source: "HoYoLAB GOOD Exporter 0.3.5",
     characters,
     artifacts,
     weapons
@@ -494,6 +510,7 @@ export const __test = {
   artifactSetKey,
   artifactSlot,
   ascensionFrom,
+  constellationTalentBoost,
   parseStatValue,
   statKey
 };
