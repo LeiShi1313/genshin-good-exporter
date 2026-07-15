@@ -1,0 +1,65 @@
+name: Release extension
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Test and validate
+        run: npm run check
+
+      - name: Verify tag matches extension version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            const manifest = JSON.parse(readFileSync("manifest.json", "utf8"));
+            const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+            const expectedTag = `v${manifest.version}`;
+            if (process.env.RELEASE_TAG !== expectedTag) {
+              throw new Error(`Tag ${process.env.RELEASE_TAG} does not match manifest ${expectedTag}`);
+            }
+            if (packageJson.version !== manifest.version) {
+              throw new Error("package.json and manifest.json versions do not match");
+            }
+          '
+
+      - name: Package load-unpacked folder
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          mkdir -p dist/genshin-good-exporter
+          cp manifest.json README.md THIRD_PARTY_NOTICES.md dist/genshin-good-exporter/
+          cp -R assets src dist/genshin-good-exporter/
+          cd dist
+          zip -r "genshin-good-exporter-${RELEASE_TAG}.zip" genshin-good-exporter
+          sha256sum "genshin-good-exporter-${RELEASE_TAG}.zip" > "genshin-good-exporter-${RELEASE_TAG}.zip.sha256"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            "dist/genshin-good-exporter-${RELEASE_TAG}.zip" \
+            "dist/genshin-good-exporter-${RELEASE_TAG}.zip.sha256" \
+            --verify-tag \
+            --generate-notes \
+            --title "Genshin GOOD Exporter ${RELEASE_TAG}"

@@ -10,7 +10,16 @@ A Manifest V3 Chrome extension that exports the characters and equipment visible
 
 The official Battle Record APIs do not expose unequipped inventory, item lock state, material quantities, artifact favorite/crafted flags, or complete roll history. The extension produces a separate in-extension report for fields it inferred or could not obtain. It never adds nonstandard fields to the GOOD JSON.
 
-## Install for development
+## Install
+
+1. Download the extension ZIP from the [latest GitHub release](https://github.com/LeiShi1313/genshin-good-exporter/releases/latest).
+2. Extract the ZIP.
+3. Open `chrome://extensions` and enable **Developer mode**.
+4. Choose **Load unpacked** and select the extracted `genshin-good-exporter` folder.
+
+Chrome cannot load an unpacked extension directly from a ZIP; it must be extracted first.
+
+## Install from source
 
 1. Open `chrome://extensions`.
 2. Enable **Developer mode**.
@@ -57,6 +66,8 @@ For an existing local optimizer checkout:
 ```bash
 GO_SOURCE_DIR=/path/to/genshin-optimizer npm run sync-data
 ```
+
+Pushing a tag matching the manifest version, such as `v0.3.4`, runs the release workflow. It validates the project, packages only the runtime extension files, creates a SHA-256 checksum, and publishes both files to a GitHub release.
 
 ## Notes
 
