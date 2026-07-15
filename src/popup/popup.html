@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Genshin GOOD Exporter</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="mark" aria-hidden="true">G</div>
+        <div>
+          <h1>GOOD Exporter</h1>
+          <p id="provider-label">HoYoLAB / 米游社 equipped builds → GOOD v3</p>
+        </div>
+      </header>
+
+      <section id="form-section">
+        <label for="uid">Genshin UID</label>
+        <input id="uid" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="Detected from this page">
+
+        <label for="server">Server</label>
+        <select id="server">
+          <option value="">Choose a server</option>
+          <optgroup label="Mainland China · 米游社">
+            <option value="cn_gf01">天空岛 · Official</option>
+            <option value="cn_qd01">世界树 · Channel / Bilibili</option>
+          </optgroup>
+          <optgroup label="Global · HoYoLAB">
+            <option value="os_usa">America</option>
+            <option value="os_euro">Europe</option>
+            <option value="os_asia">Asia</option>
+            <option value="os_cht">TW, HK, MO</option>
+          </optgroup>
+        </select>
+
+        <a id="record-link" class="record-link" href="https://webstatic.mihoyo.com/app/community-game-records/?game_id=2/#/ys" target="_blank" hidden>
+          Open 米游社 战绩 for automatic detection
+        </a>
+
+        <button id="export" type="button" disabled>
+          <span id="button-label">Export GOOD JSON</span>
+        </button>
+      </section>
+
+      <section id="status" class="status" aria-live="polite">
+        Open your Genshin Battle Record to begin.
+      </section>
+
+      <nav id="redirects" class="redirects" aria-label="Open an export page" hidden>
+        <strong>Open an export page</strong>
+        <a href="https://act.hoyolab.com/app/community-game-records-sea/index.html?gid=2#/ys" target="_blank">
+          HoYoLAB · Global Battle Chronicle
+        </a>
+        <a href="https://webstatic.mihoyo.com/app/community-game-records/?game_id=2/#/ys" target="_blank">
+          米游社 · China 战绩 export page
+        </a>
+      </nav>
+
+      <section id="result" class="result" hidden>
+        <div class="counts">
+          <div><strong id="character-count">0</strong><span>Characters</span></div>
+          <div><strong id="artifact-count">0</strong><span>Artifacts</span></div>
+          <div><strong id="weapon-count">0</strong><span>Weapons</span></div>
+        </div>
+        <details>
+          <summary id="warning-summary">Export notes</summary>
+          <ul id="warnings"></ul>
+        </details>
+      </section>
+
+      <footer>
+        Exports equipped items only. No Chrome cookie permission is requested.
+      </footer>
+    </main>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>
