@@ -5,7 +5,7 @@
   const REQUEST_TYPE = "HOYOLAB_GOOD_REQUEST";
   const RESPONSE_TYPE = "HOYOLAB_GOOD_RESPONSE";
   const PROGRESS_TYPE = "HOYOLAB_GOOD_PROGRESS";
-  const DEVICE_ID = crypto.randomUUID();
+  const DEVICE_STORAGE_KEY = "genshin-good-exporter-device-id";
   const CHINA_DS_SALT = "h8w582wxwgqvahcdkpvdhbh2w9casgfl";
   const CHINA_TOOL_VERSION = "v6.7.2-gr-cn";
 
@@ -83,6 +83,31 @@
       .join("");
   }
 
+  function persistentDeviceId() {
+    let deviceId = "";
+
+    try {
+      deviceId = localStorage.getItem(DEVICE_STORAGE_KEY) || "";
+    } catch {
+      // Some embedded pages can deny storage access. A session-only ID is still
+      // preferable to omitting the required 米游社 device header entirely.
+    }
+
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(deviceId)) {
+      deviceId = crypto.randomUUID();
+      try {
+        localStorage.setItem(DEVICE_STORAGE_KEY, deviceId);
+      } catch {
+        // Continue with the generated ID when storage is unavailable.
+      }
+    }
+
+    return deviceId;
+  }
+
+  const DEVICE_ID = persistentDeviceId();
+  const DEVICE_FP = md5(DEVICE_ID).slice(0, 13);
+
   function chinaDs() {
     const timestamp = Math.floor(Date.now() / 1000);
     const random = Math.floor(Math.random() * 100000) + 100000;
@@ -99,6 +124,8 @@
           DS: chinaDs(),
           "x-rpc-app_version": "2.3.0",
           "x-rpc-client_type": "5",
+          "x-rpc-device_id": DEVICE_ID,
+          "x-rpc-device_fp": DEVICE_FP,
           "x-rpc-page": `${CHINA_TOOL_VERSION}_${location.hash.replace(/(\?.*|\/\?.*|\/$)/, "")}`,
           "x-rpc-tool_verison": CHINA_TOOL_VERSION
         }
@@ -157,6 +184,9 @@
       }
       if (provider === "miyoushe" && json.retcode === 1034) {
         throw new Error("米游社 requires human verification (1034). Complete its Geetest challenge on the official 战绩 page, then retry; the extension cannot bypass this CAPTCHA.");
+      }
+      if (provider === "miyoushe" && [5003, 10041].includes(json.retcode)) {
+        throw new Error("米游社 rejected the browser device identity. Reopen 战绩 and retry; if this persists, sign in again so 米游社 can register this browser as a trusted device.");
       }
       const message = json.message || `${profile.name} error ${json.retcode}`;
       throw new Error(`${message} (${json.retcode})`);

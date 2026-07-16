@@ -1,6 +1,6 @@
 {
   "name": "genshin-good-exporter",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "private": true,
   "type": "module",
   "description": "Chrome extension that exports equipped HoYoLAB or 米游社 Genshin builds as GOOD v3 JSON.",

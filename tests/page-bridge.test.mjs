@@ -19,7 +19,13 @@ test("China DS helper uses a correct MD5 implementation", async () => {
     );
   const page = {
     addEventListener() {},
-    crypto: { randomUUID: () => "test-device-id" },
+    crypto: { randomUUID: () => "123e4567-e89b-42d3-a456-426614174000" },
+    localStorage: {
+      getItem() {
+        return null;
+      },
+      setItem() {}
+    },
     location: { origin: "https://www.miyoushe.com", hash: "#/ys" },
     postMessage() {},
     TextEncoder
@@ -34,5 +40,6 @@ test("China DS helper uses a correct MD5 implementation", async () => {
   const china = page.__BRIDGE_TEST__.requestProfile("miyoushe");
   assert.equal(china.headers["x-rpc-page"], "v6.7.2-gr-cn_#/ys");
   assert.equal(china.headers["x-rpc-tool_verison"], "v6.7.2-gr-cn");
-  assert.equal(china.headers["x-rpc-device_id"], undefined);
+  assert.equal(china.headers["x-rpc-device_id"], "123e4567-e89b-42d3-a456-426614174000");
+  assert.equal(china.headers["x-rpc-device_fp"], "834a05833233b");
 });

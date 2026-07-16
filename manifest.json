@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Genshin GOOD Exporter",
   "description": "Export equipped Genshin characters, weapons, and artifacts from HoYoLAB or 米游社 to GOOD v3.",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "minimum_chrome_version": "111",
   "permissions": [
     "activeTab",
