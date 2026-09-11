@@ -1,7 +1,7 @@
-// Generated from frzyc/genshin-optimizer 10.37.1. Do not edit by hand.
+// Generated from frzyc/genshin-optimizer 10.38.1. Do not edit by hand.
 // Run `npm run sync-data` to refresh these canonical GOOD mappings.
 
-export const GENSHIN_OPTIMIZER_REVISION = "10.37.1";
+export const GENSHIN_OPTIMIZER_REVISION = "10.38.1";
 
 export const TALENT_LIMITS = [1,1,2,4,6,8,10];
 
@@ -27,6 +27,16 @@ export const CONSTELLATION_TALENT_BOOSTS = {
     }
   },
   "Alhaitham": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Alyosha": {
     "3": {
       "slot": "skill",
       "amount": 3
@@ -776,6 +786,16 @@ export const CONSTELLATION_TALENT_BOOSTS = {
       "amount": 3
     }
   },
+  "Odette": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
   "Ororon": {
     "3": {
       "slot": "burst",
@@ -1225,6 +1245,16 @@ export const CONSTELLATION_TALENT_BOOSTS = {
       "slot": "burst",
       "amount": 3
     }
+  },
+  "TravelerCryo": {
+    "3": {
+      "slot": "burst",
+      "amount": 3
+    },
+    "5": {
+      "slot": "skill",
+      "amount": 3
+    }
   }
 };
 
@@ -1346,7 +1376,9 @@ export const CHARACTER_ID_MAP = {
   "10000130": "Linnea",
   "10000131": "Nicole",
   "10000132": "Prune",
-  "10000133": "Sandrone"
+  "10000133": "Sandrone",
+  "10000148": "Alyosha",
+  "10000150": "Odette"
 };
 
 export const WEAPON_ID_MAP = {
@@ -1386,6 +1418,8 @@ export const WEAPON_ID_MAP = {
   "11432": "CalamityOfEshu",
   "11433": "SerenitysCall",
   "11434": "MoonweaversDawn",
+  "11435": "HereticsMoltenBlade",
+  "11436": "Emberwell",
   "11501": "AquilaFavonia",
   "11502": "SkywardBlade",
   "11503": "FreedomSworn",
@@ -1402,6 +1436,8 @@ export const WEAPON_ID_MAP = {
   "11517": "Azurelight",
   "11518": "AthameArtis",
   "11519": "LightbearingMoonshard",
+  "11520": "WhitelakeFrostfeather",
+  "11521": "ExaiphanesBlade",
   "12101": "WasterGreatsword",
   "12201": "OldMercsPal",
   "12301": "FerrousShadow",
@@ -1434,6 +1470,8 @@ export const WEAPON_ID_MAP = {
   "12431": "EarthShaker",
   "12432": "FlameForgedInsight",
   "12433": "MasterKey",
+  "12435": "ForgedByTheGoldenMelody",
+  "12436": "BladeOfAtonement",
   "12501": "SkywardPride",
   "12502": "WolfsGravestone",
   "12503": "SongOfBrokenPines",
@@ -1473,6 +1511,8 @@ export const WEAPON_ID_MAP = {
   "13432": "TamayurateiNoOhanashi",
   "13433": "ProspectorsShovel",
   "13434": "SacrificersStaff",
+  "13435": "Frostbreath",
+  "13436": "SongOfTheVigil",
   "13501": "StaffOfHoma",
   "13502": "SkywardSpine",
   "13504": "VortexVanquisher",
@@ -1518,6 +1558,8 @@ export const WEAPON_ID_MAP = {
   "14432": "EtherlightSpindlelute",
   "14433": "BlackmarrowLantern",
   "14434": "DawningFrost",
+  "14435": "ClashOfKings",
+  "14436": "EchoesOfTheHeart",
   "14501": "SkywardAtlas",
   "14502": "LostPrayerToTheSacredWinds",
   "14504": "MemoryOfDust",
@@ -1572,6 +1614,8 @@ export const WEAPON_ID_MAP = {
   "15432": "SequenceOfSolitude",
   "15433": "SnareHook",
   "15434": "RainbowSerpentsRainBow",
+  "15435": "JadeVista",
+  "15436": "CovenantOfFrostAndSnow",
   "15501": "SkywardHarp",
   "15502": "AmosBow",
   "15503": "ElegyForTheEnd",
@@ -1647,7 +1691,9 @@ export const ARTIFACT_SET_ID_MAP = {
   "15043": "AubadeOfMorningstarAndMoon",
   "15044": "ADayCarvedFromRisingWinds",
   "15045": "CelestialGift",
-  "15046": "DisenchantmentInDeepShadow"
+  "15046": "DisenchantmentInDeepShadow",
+  "15047": "ScarletProof",
+  "15048": "HeartOfTheFurnace"
 };
 
 export const ARTIFACT_PIECE_SET_ID_MAP = {
@@ -2181,6 +2227,26 @@ export const ARTIFACT_PIECE_SET_ID_MAP = {
   "23838": "15046",
   "23839": "15046",
   "23840": "15046",
+  "23841": "15047",
+  "23842": "15047",
+  "23843": "15047",
+  "23844": "15047",
+  "23845": "15047",
+  "23846": "15047",
+  "23847": "15047",
+  "23848": "15047",
+  "23849": "15047",
+  "23850": "15047",
+  "23851": "15048",
+  "23852": "15048",
+  "23853": "15048",
+  "23854": "15048",
+  "23855": "15048",
+  "23856": "15048",
+  "23857": "15048",
+  "23858": "15048",
+  "23859": "15048",
+  "23860": "15048",
   "24101": "15001",
   "24102": "15001",
   "24103": "15020",
@@ -2831,6 +2897,46 @@ export const ARTIFACT_PIECE_SET_ID_MAP = {
   "46544": "15046",
   "46553": "15046",
   "46554": "15046",
+  "47412": "15047",
+  "47413": "15047",
+  "47422": "15047",
+  "47423": "15047",
+  "47432": "15047",
+  "47433": "15047",
+  "47442": "15047",
+  "47443": "15047",
+  "47452": "15047",
+  "47453": "15047",
+  "47513": "15047",
+  "47514": "15047",
+  "47523": "15047",
+  "47524": "15047",
+  "47533": "15047",
+  "47534": "15047",
+  "47543": "15047",
+  "47544": "15047",
+  "47553": "15047",
+  "47554": "15047",
+  "48412": "15048",
+  "48413": "15048",
+  "48422": "15048",
+  "48423": "15048",
+  "48432": "15048",
+  "48433": "15048",
+  "48442": "15048",
+  "48443": "15048",
+  "48452": "15048",
+  "48453": "15048",
+  "48513": "15048",
+  "48514": "15048",
+  "48523": "15048",
+  "48524": "15048",
+  "48533": "15048",
+  "48534": "15048",
+  "48543": "15048",
+  "48544": "15048",
+  "48553": "15048",
+  "48554": "15048",
   "51110": "10001",
   "51111": "10001",
   "51112": "10001",
