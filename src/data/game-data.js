@@ -1,7 +1,7 @@
-// Generated from frzyc/genshin-optimizer 10.38.1. Do not edit by hand.
+// Generated from frzyc/genshin-optimizer 10.39.0. Do not edit by hand.
 // Run `npm run sync-data` to refresh these canonical GOOD mappings.
 
-export const GENSHIN_OPTIMIZER_REVISION = "10.38.1";
+export const GENSHIN_OPTIMIZER_REVISION = "10.39.0";
 
 export const TALENT_LIMITS = [1,1,2,4,6,8,10];
 
@@ -1016,6 +1016,26 @@ export const CONSTELLATION_TALENT_BOOSTS = {
       "amount": 3
     }
   },
+  "Vesna": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
+  "Vodyanitsa": {
+    "3": {
+      "slot": "skill",
+      "amount": 3
+    },
+    "5": {
+      "slot": "burst",
+      "amount": 3
+    }
+  },
   "Wanderer": {
     "3": {
       "slot": "burst",
@@ -1377,6 +1397,8 @@ export const CHARACTER_ID_MAP = {
   "10000131": "Nicole",
   "10000132": "Prune",
   "10000133": "Sandrone",
+  "10000140": "Vodyanitsa",
+  "10000143": "Vesna",
   "10000148": "Alyosha",
   "10000150": "Odette"
 };
@@ -1420,6 +1442,8 @@ export const WEAPON_ID_MAP = {
   "11434": "MoonweaversDawn",
   "11435": "HereticsMoltenBlade",
   "11436": "Emberwell",
+  "11437": "NewBough",
+  "11438": "SilverLight",
   "11501": "AquilaFavonia",
   "11502": "SkywardBlade",
   "11503": "FreedomSworn",
@@ -1438,6 +1462,7 @@ export const WEAPON_ID_MAP = {
   "11519": "LightbearingMoonshard",
   "11520": "WhitelakeFrostfeather",
   "11521": "ExaiphanesBlade",
+  "11522": "BeyondTheChrysalis",
   "12101": "WasterGreatsword",
   "12201": "OldMercsPal",
   "12301": "FerrousShadow",
@@ -1560,6 +1585,7 @@ export const WEAPON_ID_MAP = {
   "14434": "DawningFrost",
   "14435": "ClashOfKings",
   "14436": "EchoesOfTheHeart",
+  "14437": "WintersHeavyHeart",
   "14501": "SkywardAtlas",
   "14502": "LostPrayerToTheSacredWinds",
   "14504": "MemoryOfDust",
@@ -1579,6 +1605,7 @@ export const WEAPON_ID_MAP = {
   "14521": "ReliquaryOfTruth",
   "14522": "NocturnesCurtainCall",
   "14523": "AngelosHeptades",
+  "14524": "HymnOfTheMaelstrom",
   "15101": "HuntersBow",
   "15201": "SeasonedHuntersBow",
   "15301": "RavenBow",
@@ -1616,6 +1643,7 @@ export const WEAPON_ID_MAP = {
   "15434": "RainbowSerpentsRainBow",
   "15435": "JadeVista",
   "15436": "CovenantOfFrostAndSnow",
+  "15437": "BreezeborneRefrain",
   "15501": "SkywardHarp",
   "15502": "AmosBow",
   "15503": "ElegyForTheEnd",
